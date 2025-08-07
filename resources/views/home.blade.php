@@ -11,9 +11,36 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ $item->title }}</h5>
                 <p class="card-text">{{Str::limit( $item->content, 50)}}</p>
-                <a href="{{ route( 'artikel.show',  $item->id) }}" class="btn btn-primary">Go somewhere</a>
+                <div>
+                    <a href="{{ route( 'artikel.show',  $item->id) }}" class="btn btn-primary btn-sm">Lihat</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#hapusModal{{ $item->id }}">Hapus</button>
                 </div>
+                   </div>
                 </div>
+
+                 <!-- Modul Konfirmasi Hapus -->
+                <div class="modal fade" id="hapusModal{{ $item->id }}" tabindex="-1" aria-labelledby="hapusModalLabel{{ $item->id }}" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="hapusModalLabel{{ $item->id }}">Konfirmasi Hapus</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Apakah kamu yakin ingin menghapus artikel <strong>{{ $item->title }}</strong>?
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <form action="{{ route('artikel.destroy', $item->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
             @endforeach  
          </div>
         

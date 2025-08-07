@@ -9,8 +9,11 @@
             <p class="card-text">{!! nl2br(e($artikel->content)) !!}</p>
             <span class="badge bg-secondary">{{ $artikel->status }}</span>
             <br>
+            <div class="d-flex justify-content-between mt-3">
             <a href="{{ route('artikel.index') }}" class="btn btn-primary mt-3">Kembali</a>
-        </div>
+            <a href="{{ route('artikel.edit', $artikel->id) }}" class="btn btn-warning mt-3">Edit</a>
+            </div>
+             </div>
     </div>
 </div>
 @endsection
